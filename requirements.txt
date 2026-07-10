@@ -1,0 +1,15 @@
+# Framework del agente
+langchain
+langchain-community
+
+# Procesamiento de documentos
+pypdf
+pandas
+
+# Modelo de lenguaje (Gemma autoalojado)
+transformers
+torch
+accelerate
+
+# Utilidades
+python-dotenv
