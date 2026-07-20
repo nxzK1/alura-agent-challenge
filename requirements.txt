@@ -1,15 +1,16 @@
 # Framework del agente
 langchain
 langchain-community
+langchain-ollama
+langchain-chroma
+langchain-text-splitters
 
 # Procesamiento de documentos
 pypdf
 pandas
 
-# Modelo de lenguaje (Gemma autoalojado)
-transformers
-torch
-accelerate
+# Base vectorial
+chromadb
 
 # Utilidades
 python-dotenv
