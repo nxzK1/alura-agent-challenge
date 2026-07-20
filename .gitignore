@@ -3,7 +3,7 @@ venv/
 env/
 .venv/
 
-# Variables de entorno / credenciales
+# Variables de entorno
 .env
 
 # Python
@@ -12,13 +12,16 @@ __pycache__/
 *.pyo
 .ipynb_checkpoints/
 
-# Datos de prueba (documentos subidos por el usuario)
+# Datos de prueba
 data/
 *.pdf
 *.csv
 !data/.gitkeep
 
-# Sistema operativo / editores
+# Base vectorial generada
+chroma_db/
+
+# Sistema operativo
 .DS_Store
 .vscode/
 .idea/
