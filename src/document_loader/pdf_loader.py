@@ -1,6 +1,14 @@
 import os
 from pathlib import Path
 
+# --- Parche de sqlite3 para Chroma en Linux (ver detalle abajo) -----------
+try:
+    __import__("pysqlite3")
+    import sys as _sys
+    _sys.modules["sqlite3"] = _sys.modules.pop("pysqlite3")
+except ImportError:
+    pass
+
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_ollama import OllamaEmbeddings

@@ -3,16 +3,17 @@ langchain
 langchain-ollama
 langchain-chroma
 langchain-text-splitters
-
+ 
 # Procesamiento de documentos
 pypdf
-
+ 
 # Base vectorial
 chromadb
-
+pysqlite3-binary; sys_platform == "linux"
+ 
 # API web
 fastapi
 uvicorn[standard]
-
+ 
 # Utilidades
 python-dotenv
