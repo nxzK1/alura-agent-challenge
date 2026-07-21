@@ -1,5 +1,6 @@
 # Framework del agente
 langchain
+langchain-classic
 langchain-ollama
 langchain-chroma
 langchain-text-splitters
