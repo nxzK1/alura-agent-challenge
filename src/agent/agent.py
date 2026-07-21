@@ -1,4 +1,13 @@
 import os
+import sys
+
+# --- Parche de sqlite3 para Chroma en Linux (ver pdf_loader.py para detalle) --
+try:
+    __import__("pysqlite3")
+    import sys as _sys
+    _sys.modules["sqlite3"] = _sys.modules.pop("pysqlite3")
+except ImportError:
+    pass
 
 from langchain_ollama import ChatOllama, OllamaEmbeddings
 from langchain_chroma import Chroma
