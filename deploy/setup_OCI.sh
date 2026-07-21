@@ -24,7 +24,7 @@ ollama pull nomic-embed-text
 
 echo "== 5. Clonando el repositorio =="
 git clone https://github.com/nxzK1/alura-agent-challenge.git
-cd alura-agent-challenge-main
+cd alura-agent-challenge
 
 echo "== 6. Creando entorno virtual e instalando dependencias =="
 python3 -m venv .venv
