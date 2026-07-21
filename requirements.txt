@@ -3,12 +3,16 @@ langchain
 langchain-ollama
 langchain-chroma
 langchain-text-splitters
- 
+
 # Procesamiento de documentos
 pypdf
- 
+
 # Base vectorial
 chromadb
- 
+
+# API web
+fastapi
+uvicorn[standard]
+
 # Utilidades
 python-dotenv
