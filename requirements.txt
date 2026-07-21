@@ -1,16 +1,14 @@
 # Framework del agente
 langchain
-langchain-community
 langchain-ollama
 langchain-chroma
 langchain-text-splitters
-
+ 
 # Procesamiento de documentos
 pypdf
-pandas
-
+ 
 # Base vectorial
 chromadb
-
+ 
 # Utilidades
 python-dotenv
