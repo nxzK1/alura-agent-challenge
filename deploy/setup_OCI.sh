@@ -13,7 +13,7 @@ echo "== 1. Actualizando el sistema =="
 sudo apt update && sudo apt upgrade -y
 
 echo "== 2. Instalando Python y Git =="
-sudo apt install -y python3-venv python3-pip git
+sudo apt install -y python3-venv python3-pip git zstd
 
 echo "== 3. Instalando Ollama (x86_64) =="
 curl -fsSL https://ollama.com/install.sh | sh
@@ -24,11 +24,11 @@ ollama pull nomic-embed-text
 
 echo "== 5. Clonando el repositorio =="
 git clone https://github.com/nxzK1/alura-agent-challenge.git
-cd alura-agent
+cd alura-agent-challenge-main
 
 echo "== 6. Creando entorno virtual e instalando dependencias =="
-python3 -m venv venv
-source venv/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 
 echo "== 7. Configurando variables de entorno =="
