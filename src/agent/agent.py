@@ -13,7 +13,7 @@ CHROMA_PERSIST_DIRECTORY = os.environ.get("CHROMA_PERSIST_DIRECTORY", "./chroma_
 SYSTEM_PROMPT = """Eres un asistente que responde preguntas basandote unicamente en el contexto proporcionado, extraido de documentos PDF.
 
 Reglas:
-- Si la respuesta no se encuentra en el contexto, dilo explicitamente (Por ejemplo: "No encontré esa información dentro de los documentos de la clinica"). No inventes información ni hagas suposiciones.
+- Si la respuesta no se encuentra en el contexto, dilo explicitamente (Por ejemplo: "No encontré esa información en los documentos de la clínica disponibles. Puedo ayudarte con preguntas sobre turnos, coberturas médicas, políticas de cancelación, instrucciones para consultas o privacidad de datos."). No inventes información ni hagas suposiciones.
 - Responde de forma clara y concisa, evitando redundancias y completamente en español.
 - Si es util, puedes mencionar de qué documento proviene la información.
 
@@ -38,9 +38,9 @@ def construir_agente(persist_directory: str = CHROMA_PERSIST_DIRECTORY):
     Arma la cadena RAG completa: Retriever (Chroma) + LLM (Gemma via Ollama), Usa API de LangChain (create_retrieval_chain)
     """
     vectorstore = cargar_vectorstore(persist_directory)
-    retriever = vectorstore.as_retriever(search_kwargs={"k": 3})  # Ajusta 'k' según tus necesidades
+    retriever = vectorstore.as_retriever(search_kwargs={"k": 8})  # Ajusta 'k' según tus necesidades
 
-    llm = ChatOllama(model=GEMMA_MODEL_ID, temperature=0.3)
+    llm = ChatOllama(model=GEMMA_MODEL_ID, temperature=0)
 
     prompt = ChatPromptTemplate.from_messages([
         ("system", SYSTEM_PROMPT),
@@ -48,10 +48,10 @@ def construir_agente(persist_directory: str = CHROMA_PERSIST_DIRECTORY):
     ])
 
     # Cadena que combina los documentos recuperados dentro del prompt para el LLM.
-    document_chain = create_stuff_documents_chain(llm=llm, prompt=prompt)
+    document_chain = create_stuff_documents_chain(llm, prompt)
 
     # Cadena final que integra el retriever y la cadena de documentos para formar el agente RAG.
-    agente = create_retrieval_chain(retriever=retriever, combine_documents_chain=document_chain)
+    agente = create_retrieval_chain(retriever, document_chain)
     return agente
 
 def responder_pregunta(agente, pregunta: str) -> dict:

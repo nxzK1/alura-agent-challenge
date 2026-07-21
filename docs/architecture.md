@@ -2,21 +2,17 @@
 
 ## Visión general
 
-Alura Agent combina dos patrones de IA distintos según el tipo de documento cargado:
-
-- **PDF → RAG (Retrieval-Augmented Generation):** el documento se divide en fragmentos, se convierte en vectores (embeddings) y se almacena en una base vectorial. Cuando el usuario pregunta, se recuperan los fragmentos más relevantes y se envían al modelo como contexto.
-- **CSV → Agente con herramientas (tool use):** en vez de "buscar texto parecido", el agente ejecuta operaciones reales sobre los datos (con Pandas) para responder preguntas analíticas (promedios, filtros, agrupaciones).
+Alura Agent usa el patrón **RAG (Retrieval-Augmented Generation)**: los documentos PDF se dividen en fragmentos, se convierten en vectores (embeddings) y se almacenan en una base vectorial. Cuando el usuario pregunta, se recuperan los fragmentos más relevantes y se envían al modelo como contexto para generar la respuesta.
 
 ## Etapa 1 — Procesamiento de documentos
 
-- `pdf_loader.py`: extrae texto de PDFs con `pypdf`, lo divide en fragmentos (chunks) y genera embeddings.
-- `csv_loader.py`: carga el CSV con `pandas` y expone funciones que el agente puede invocar como herramientas.
+- `pdf_loader.py`: extrae texto de los PDFs con `pypdf`, lo divide en fragmentos (chunks) conservando metadata de origen (archivo y página), y genera embeddings con un modelo servido por Ollama (`nomic-embed-text`).
 
 ## Etapa 2 — Agente
 
-- Construido con LangChain.
-- Combina un *retriever* (para el PDF) con *tools* personalizadas (para el CSV).
-- Recibe la pregunta del usuario, decide qué fuente(s) consultar, y genera la respuesta con el modelo de lenguaje (Gemma).
+- Construido con LangChain (`create_retrieval_chain` + `create_stuff_documents_chain`).
+- El retriever busca en la base vectorial (Chroma) los fragmentos más relevantes para la pregunta.
+- El modelo de lenguaje (Gemma, vía Ollama) genera la respuesta a partir de esos fragmentos, citando el documento de origen.
 
 ## Etapa 3 — Deploy
 
@@ -33,9 +29,13 @@ Pregunta en lenguaje natural
   │
   ▼
 Agente (LangChain)
-  ├── ¿Pregunta sobre el PDF? → Retriever (RAG) → Fragmentos relevantes → LLM
-  └── ¿Pregunta sobre el CSV? → Tool (Pandas)   → Resultado calculado  → LLM
   │
   ▼
-Respuesta al usuario
+Retriever (Chroma) → Fragmentos relevantes del PDF
+  │
+  ▼
+LLM (Gemma vía Ollama) → Respuesta fundamentada en el contexto
+  │
+  ▼
+Respuesta al usuario (con fuente citada)
 ```

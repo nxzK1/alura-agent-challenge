@@ -1,19 +1,17 @@
 # Alura Agent
 
-Agente de Inteligencia Artificial capaz de recibir y responder preguntas en lenguaje natural sobre documentos propios del usuario (PDF y CSV).
+Agente de Inteligencia Artificial capaz de recibir y responder preguntas en lenguaje natural sobre documentos PDF propios del usuario.
 
 ## 🎯 Objetivo
 
-Permitir que un usuario cargue un documento (PDF como fuente principal, CSV como fuente secundaria) y converse con un agente de IA que responde preguntas basándose en el contenido de ese documento.
+Permitir que un usuario cargue documentos PDF y converse con un agente de IA que responde preguntas basándose en el contenido de esos documentos.
 
 ## 🏗️ Arquitectura
 
 El proyecto se desarrolla en 3 etapas:
 
-1. **Procesamiento de documentos** — Carga de PDF (vía `pypdf`) y CSV (vía `pandas`), y preparación del contenido para que el agente pueda consultarlo.
-2. **Construcción del agente** — Agente basado en LangChain que combina:
-   - **RAG (Retrieval-Augmented Generation)** para responder preguntas sobre el contenido del PDF.
-   - **Ejecución de herramientas** (tool use) para responder preguntas analíticas sobre el CSV (ej. promedios, filtros).
+1. **Procesamiento de documentos** — Carga de PDF (vía `pypdf`) y preparación del contenido (fragmentación + embeddings) para que el agente pueda consultarlo.
+2. **Construcción del agente** — Agente basado en LangChain que usa **RAG (Retrieval-Augmented Generation)** para responder preguntas sobre el contenido de los PDFs, con Gemma como modelo de lenguaje (vía Ollama).
 3. **Deploy** — Despliegue del agente en OCI (Oracle Cloud Infrastructure).
 
 > 📄 Ver [`docs/architecture.md`](docs/architecture.md) para el detalle técnico de la arquitectura.
@@ -25,9 +23,8 @@ El proyecto se desarrolla en 3 etapas:
 | Lenguaje            | Python                              |
 | Framework de agente | LangChain                           |
 | Procesamiento PDF   | PyPDF                               |
-| Procesamiento CSV   | Pandas                              |
-| Modelo de lenguaje  | Gemma (autoalojado, vía Google Colab) |
-| Prototipado         | Google Colab                        |
+| Modelo de lenguaje  | Gemma (autoalojado localmente vía Ollama) |
+| Entorno de desarrollo | IDE local (VS Code / PyCharm)     |
 | Deploy              | OCI (Oracle Cloud Infrastructure)   |
 
 ## 📁 Estructura del proyecto
@@ -36,7 +33,7 @@ El proyecto se desarrolla en 3 etapas:
 alura-agent/
 ├── notebooks/              # Prototipos y experimentos en Colab
 ├── src/
-│   ├── document_loader/    # Etapa 1: carga y procesamiento de PDF/CSV
+│   ├── document_loader/    # Etapa 1: carga y procesamiento de PDF
 │   ├── agent/               # Etapa 2: lógica del agente
 │   └── app.py                # Punto de entrada local
 ├── deploy/                 # Etapa 3: configuración de despliegue en OCI
@@ -67,14 +64,16 @@ python src/app.py
 
 ## 💬 Ejemplos de uso
 
-> _Se completará a medida que el agente esté funcional, con capturas de preguntas y respuestas reales._
+> _Se completará con capturas reales de la consola una vez validadas las respuestas finales._
 
 ```
-Usuario: ¿De qué trata el documento cargado?
-Agente: [respuesta generada por el agente]
+Tú: ¿Cuál es la política de cancelación de turnos?
+Agente: [respuesta generada por el agente, basada en politica_cancelaciones.pdf]
+(Fuente: politica_cancelaciones.pdf)
 
-Usuario: ¿Cuál es el promedio de la columna "ventas" en el CSV?
-Agente: [respuesta generada ejecutando la consulta sobre el CSV]
+Tú: ¿Qué coberturas médicas acepta la clínica?
+Agente: [respuesta generada por el agente, basada en guia_coberturas_medicas.pdf]
+(Fuente: guia_coberturas_medicas.pdf)
 ```
 
 ## ☁️ Deploy
@@ -84,8 +83,8 @@ Agente: [respuesta generada ejecutando la consulta sobre el CSV]
 ## 📌 Estado del proyecto
 
 - [x] Estructura inicial del repositorio
-- [ ] Etapa 1: Carga y procesamiento de documentos
-- [ ] Etapa 2: Construcción del agente
+- [x] Etapa 1: Carga y procesamiento de documentos (PDF)
+- [x] Etapa 2: Construcción del agente (RAG con LangChain + Ollama/Gemma)
 - [ ] Etapa 3: Deploy en OCI
 
 ## 📄 Licencia
