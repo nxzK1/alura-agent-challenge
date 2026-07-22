@@ -1,0 +1,11 @@
+[theme]
+# Paleta "ficha clínica": verde salvia (confianza clínica) sobre fondo
+# blanco-menta pálido, en vez del beige/terracota genérico.
+primaryColor = "#2F6F62"
+backgroundColor = "#F0F4F2"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#1B2B27"
+font = "sans serif"
+
+[server]
+headless = true
