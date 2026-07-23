@@ -97,19 +97,19 @@ Agente: Debe presentar su documento de identidad vigente, la credencial de
 su cobertura médica o seguro, y cualquier estudio médico realizado en los
 últimos 6 meses.
 
-Tú: ¿Cuántas horas de ayuno necesito antes de un análisis de sangre?
+Usuario: ¿Cuántas horas de ayuno necesito antes de un análisis de sangre?
 Agente: Se requiere un ayuno estricto de 8 horas, permitiendo solo agua
 simple en cantidades moderadas.
 
-Tú: ¿Qué pasa si no me presento a mi cita y no aviso?
+Usuario: ¿Qué pasa si no me presento a mi cita y no aviso?
 Agente: Perderá la prioridad para turnos web durante los siguientes 30 días
 y deberá abonar el 30% de la consulta antes de agendar un nuevo turno.
 
-Tú: Si tengo cobertura NorteSalud Care y falto a mi cita sin avisar, ¿qué me pasa?
+Usuario: Si tengo cobertura NorteSalud Care y falto a mi cita sin avisar, ¿qué me pasa?
 Agente: [respuesta combinando ambos documentos: requisitos de autorización
 previa de NorteSalud Care y la sanción por inasistencia]
 
-Tú: ¿Cuál es la capital de Francia?
+Usuario: ¿Cuál es la capital de Francia?
 Agente: No encontré esa información en los documentos de la clínica
 disponibles. Puedo ayudarte con preguntas sobre turnos, coberturas médicas,
 políticas de cancelación, instrucciones para consultas o privacidad de datos.
@@ -129,7 +129,13 @@ La API y la interfaz web (MIA) están desplegadas en una instancia de OCI, cada 
 
 **Capturas del deploy funcionando:**
 
-![API funcionando en OCI](docs/images/deploy-docs.png)
+![API funcionando en OCI](docs/images/Captura%20de%20pantalla%202026-07-21%20184038.png)
+![webapp desplegada en OCI](docs/images/webapp%20desplegada%20en%20OCI%20y%20darkMode.png)
+![webapp desplegada en OCI](docs/images/generando%20respuesta.png)
+![webapp desplegada en OCI](docs/images/Respuesta%20con%20contexto%20via%20PDF.png)
+![webapp desplegada en OCI](docs/images/Respuesta%20sin%20contexto%20ni%20relacion.png)
+![Más imagenes de funcionamiento en: ](../docs/images/)
+
 
 > Ver [`deploy/README.md`](deploy/README.md) para la guía completa paso a paso de cómo se desplegó (creación de la instancia, configuración de red, y puesta en marcha de ambos servicios).
 
@@ -142,4 +148,4 @@ La API y la interfaz web (MIA) están desplegadas en una instancia de OCI, cada 
 
 ## 📄 Licencia
 
-Proyecto educativo desarrollado como parte de un programa de formación.
+Proyecto tipo Challenge desarrollado como parte del Programa Oracle ONE junto a ALURA LATAM.

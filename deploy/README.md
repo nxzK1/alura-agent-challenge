@@ -56,7 +56,7 @@ Instancia: Ubuntu 24.04, shape `VM.Standard.E5.Flex` (AMD x86_64), pagada con cr
    sudo systemctl daemon-reload
    sudo systemctl enable alura-agent
    sudo systemctl start alura-agent
-   sudo systemctl status alura-agent   # debe decir "active (running)"
+   sudo systemctl status alura-agent
    ```
 8. Configurar la interfaz web (MIA, Streamlit) como un **segundo servicio systemd independiente** — corre en su propio puerto (8501) y llama a la API por HTTP, así que puede reiniciarse o fallar sin afectar a la API:
    ```bash
